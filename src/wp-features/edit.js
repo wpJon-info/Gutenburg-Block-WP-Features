@@ -1,42 +1,76 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
+import { useBlockProps, RichText, BlockControls } from '@wordpress/block-editor';
+import { ToolbarGroup, ToolbarButton, ToolbarDropdownMenu } from '@wordpress/components';
+
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
-	const { content, featureType, showBorder } = attributes;
-
+	
+	const { content } = attributes;
 	return (
-		<div {...useBlockProps()}>
-			<InspectorControls>
-				<PanelBody title={__('Feature Settings', 'jon-gutenberg-dev-wp-features')}>
-					<SelectControl
-						label={__('Feature Type', 'jon-gutenberg-dev-wp-features')}
-						value={attributes.featureType}
-						options={[
-							{ label: 'Callout', value: 'callout' },
-							{ label: 'Highlight', value: 'highlight' },
-							{ label: 'Notice', value: 'notice' },
-							{ label: 'Alert', value: 'alert' }
-						]}
-						onChange={(featureType) => setAttributes({ featureType })}
-						help={__('Select the type of feature block', 'jon-gutenberg-dev-wp-features')}
+		<>
+			<BlockControls>
+				<ToolbarGroup>
+					<ToolbarButton 
+						title="Button 1"
+						icon="admin-generic"
+						isActive={true}
+						onClick={() => console.log("Button one clicked")}
 					/>
-					<ToggleControl
-						label={__('Show Border', 'jon-gutenberg-dev-wp-features')}
-						checked={attributes.showBorder}
-						onChange={(showBorder) => setAttributes({ showBorder })}
-						help={__('Display a border around the feature', 'jon-gutenberg-dev-wp-features')}
+					<ToolbarButton 
+						title="Button 2"
+						icon="admin-collapse"
+						isActive={false}
+						onClick={() => console.log("Button two clicked")}
 					/>
-				</PanelBody>
-			</InspectorControls>
-			<RichText
-				tagName="div"
-				className={`wp-features-content feature-${attributes.featureType}`}
-				value={attributes.content}
-				onChange={(content) => setAttributes({ content })}
-				placeholder={__('Enter your feature content...', 'jon-gutenberg-dev-wp-features')}
+				</ToolbarGroup>
+
+				{content && 
+					<ToolbarGroup>
+						<ToolbarButton 
+							title="Align Left"
+							icon="editor-alignleft"
+							onClick={() => console.log('Align left')}
+						/>
+						<ToolbarButton 
+							title="Align Center"
+							icon="editor-aligncenter"
+							onClick={() => console.log('Align center')}
+						/>
+						<ToolbarButton 
+							title="Align Right"
+							icon="editor-alignright"
+							onClick={() => console.log('Align right')}
+						/>
+
+						<ToolbarDropdownMenu
+							icon="arrow-down-alt2"
+							label={__('More Alignments', 'text-box')}
+							controls={[
+								{
+									title: __('Wide', 'text-box'),
+									icon: 'align-wide',
+									onClick: () => console.log('Wide alignment')
+								},
+								{
+									title: __('Full', 'text-box'),
+									icon: 'align-full',
+									onClick: () => console.log('Full alignment')
+								}
+							]}
+						/>
+					</ToolbarGroup>
+				}
+			</BlockControls>
+
+			<RichText  
+				{ ...useBlockProps() } 
+				value={content}
+				onChange={(value) => setAttributes({ content: value })}
+				placeholder={__("Your Text", "wp-features")}
+				tagName="h4"
+				allowedFormats={['core/bold']}
 			/>
-		</div>
+		</>
 	);
 }

@@ -11,6 +11,8 @@
 	"attributes": {
 		"content": {
 			"type": "string",
+			"source":"html",
+			"selector": "h4",
 			"default": "// Enter your code here..."
 		},
 		"language": {

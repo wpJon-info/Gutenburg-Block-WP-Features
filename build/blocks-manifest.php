@@ -16,6 +16,8 @@ return array(
 		'attributes' => array(
 			'content' => array(
 				'type' => 'string',
+				'source' => 'html',
+				'selector' => 'h4',
 				'default' => '// Enter your code here...'
 			),
 			'language' => array(
