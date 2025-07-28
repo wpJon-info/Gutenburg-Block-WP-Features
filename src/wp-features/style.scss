@@ -5,8 +5,77 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-create-block-wp-features {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
+.wp-block-jon-gutenberg-dev-wp-features {
+	position: relative;
+
+	.feature-type-label {
+		position: absolute;
+		top: 8px;
+		right: 12px;
+		background: rgba(0, 0, 0, 0.7);
+		color: white;
+		padding: 2px 8px;
+		border-radius: 3px;
+		font-size: 12px;
+		text-transform: uppercase;
+		z-index: 1;
+		
+		&.callout {
+			background: rgba(59, 130, 246, 0.8);
+		}
+		
+		&.highlight {
+			background: rgba(245, 158, 11, 0.8);
+		}
+		
+		&.notice {
+			background: rgba(16, 185, 129, 0.8);
+		}
+		
+		&.alert {
+			background: rgba(239, 68, 68, 0.8);
+		}
+	}
+
+	.wp-features-content {
+		border: 1px solid #e1e4e8;
+		border-radius: 6px;
+		padding: 16px;
+		padding-top: 32px;
+		background-color: #f9fafb;
+		font-size: 16px;
+		line-height: 1.6;
+		color: #374151;
+		
+		// Feature type styling
+		&.feature-callout {
+			background-color: #eff6ff;
+			border-color: #bfdbfe;
+		}
+		
+		&.feature-highlight {
+			background-color: #fefbeb;
+			border-color: #fde68a;
+		}
+		
+		&.feature-notice {
+			background-color: #ecfdf5;
+			border-color: #a7f3d0;
+		}
+		
+		&.feature-alert {
+			background-color: #fef2f2;
+			border-color: #fecaca;
+		}
+		
+		// Border toggle support
+		&.has-border {
+			border-width: 2px;
+		}
+
+		// Remove default margins
+		p {
+			margin: 0;
+		}
+	}
 }

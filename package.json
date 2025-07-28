@@ -1,8 +1,8 @@
 {
-	"name": "wp-features",
-	"version": "0.1.0",
+	"name": "jon-gutenberg-dev-wp-features",
+	"version": "1.0.0",
 	"description": "Example block scaffolded with Create Block tool.",
-	"author": "The WordPress Contributors",
+	"author": "Jon A",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {

@@ -1,16 +1,16 @@
 <?php
 /**
- * Plugin Name:       Wp Features
+ * Plugin Name:       Jon Gutenberg Wp Features
  * Description:       Example block scaffolded with Create Block tool.
- * Version:           0.1.0
+ * Version:           1.0.0
  * Requires at least: 6.7
  * Requires PHP:      7.4
- * Author:            The WordPress Contributors
+ * Author:            Jon A
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       wp-features
+ * Text Domain:       jon-gutenberg-dev-wp-features
  *
- * @package CreateBlock
+ * @package JonGutenbergDevWpFeatures
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @see https://make.wordpress.org/core/2025/03/13/more-efficient-block-type-registration-in-6-8/
  * @see https://make.wordpress.org/core/2024/10/17/new-block-type-registration-apis-to-improve-performance-in-wordpress-6-7/
  */
-function create_block_wp_features_block_init() {
+function jon_gutenberg_dev_wp_features_block_init() {
 	/**
 	 * Registers the block(s) metadata from the `blocks-manifest.php` and registers the block type(s)
 	 * based on the registered block metadata.
@@ -56,4 +56,4 @@ function create_block_wp_features_block_init() {
 		register_block_type( __DIR__ . "/build/{$block_type}" );
 	}
 }
-add_action( 'init', 'create_block_wp_features_block_init' );
+add_action( 'init', 'jon_gutenberg_dev_wp_features_block_init' );

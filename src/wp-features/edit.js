@@ -1,38 +1,42 @@
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
 import { __ } from '@wordpress/i18n';
-
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-import { useBlockProps } from '@wordpress/block-editor';
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
+import { useBlockProps, RichText, InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
 import './editor.scss';
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @return {Element} Element to render.
- */
-export default function Edit() {
+export default function Edit({ attributes, setAttributes }) {
+	const { content, featureType, showBorder } = attributes;
+
 	return (
-		<p { ...useBlockProps() }>
-			{ __( 'Wp Features – hello from the editor!', 'wp-features' ) }
-		</p>
+		<div {...useBlockProps()}>
+			<InspectorControls>
+				<PanelBody title={__('Feature Settings', 'jon-gutenberg-dev-wp-features')}>
+					<SelectControl
+						label={__('Feature Type', 'jon-gutenberg-dev-wp-features')}
+						value={attributes.featureType}
+						options={[
+							{ label: 'Callout', value: 'callout' },
+							{ label: 'Highlight', value: 'highlight' },
+							{ label: 'Notice', value: 'notice' },
+							{ label: 'Alert', value: 'alert' }
+						]}
+						onChange={(featureType) => setAttributes({ featureType })}
+						help={__('Select the type of feature block', 'jon-gutenberg-dev-wp-features')}
+					/>
+					<ToggleControl
+						label={__('Show Border', 'jon-gutenberg-dev-wp-features')}
+						checked={attributes.showBorder}
+						onChange={(showBorder) => setAttributes({ showBorder })}
+						help={__('Display a border around the feature', 'jon-gutenberg-dev-wp-features')}
+					/>
+				</PanelBody>
+			</InspectorControls>
+			<RichText
+				tagName="div"
+				className={`wp-features-content feature-${attributes.featureType}`}
+				value={attributes.content}
+				onChange={(content) => setAttributes({ content })}
+				placeholder={__('Enter your feature content...', 'jon-gutenberg-dev-wp-features')}
+			/>
+		</div>
 	);
 }
